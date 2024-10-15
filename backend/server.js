@@ -7,8 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Substitua com a URI do MongoDB
 const mongoURI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/reservas";
+  process.env.MONGODB_URI ||
+  "mongodb+srv://ivofernandesdev:<0JIjPFkQeKuU9a10>@cluster0.dex20.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+// Conexão ao MongoDB
 mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
@@ -29,7 +33,7 @@ const ReservaSchema = new mongoose.Schema({
 const Reserva = mongoose.model("Reserva", ReservaSchema);
 
 app.get("/", (req, res) => {
-  res.send("API de Reservas - Servindo na porta " + PORT);
+  res.send("API de Reservas - Servindo na porta " + process.env.PORT);
 });
 
 app.post("/reservas", async (req, res) => {
