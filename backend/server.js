@@ -10,7 +10,7 @@ app.use(express.json());
 // Substitua com a URI do MongoDB
 const mongoURI =
   process.env.MONGODB_URI ||
-  "mongodb+srv://ivofernandesdev:0JIjPFkQeKuU9a10@cluster0.dex20.mongodb.net/<nomeDaBase>?retryWrites=true&w=majority&appName=Cluster0";
+  "mongodb+srv://ivofernandesdev:0JIjPFkQeKuU9a10@cluster0.dex20.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Conexão ao MongoDB
 mongoose
