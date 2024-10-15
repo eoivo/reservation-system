@@ -28,6 +28,10 @@ const ReservaSchema = new mongoose.Schema({
 
 const Reserva = mongoose.model("Reserva", ReservaSchema);
 
+app.get("/", (req, res) => {
+  res.send("API de Reservas - Servindo na porta " + process.env.PORT);
+});
+
 app.post("/reservas", async (req, res) => {
   try {
     const novaReserva = new Reserva(req.body);
