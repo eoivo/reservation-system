@@ -1,39 +1,33 @@
-// Importar dependências
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Inicializar a aplicação Express
 const app = express();
 
-// Middlewares
-app.use(cors()); // Permitir que o front-end aceda ao back-end
-app.use(express.json()); // Permitir que o corpo das requisições seja em JSON
+app.use(cors());
+app.use(express.json());
 
-// Conexão à base de dados MongoDB
+const mongoURI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/reservas";
 mongoose
-  .connect("mongodb://localhost:27017/reservas", {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("Conectado ao MongoDB"))
   .catch((err) => console.error("Erro ao conectar ao MongoDB:", err));
 
-// Modelo de Reserva (Mongoose)
 const ReservaSchema = new mongoose.Schema({
   nomeCliente: { type: String, required: true },
   telefone: { type: String, required: true },
   dataReserva: { type: Date, required: true },
   numeroPessoas: { type: Number, required: true },
   restaurante: { type: String, required: true },
-  status: { type: String, default: "pendente" }, // Status: pendente, confirmada, cancelada
+  status: { type: String, default: "pendente" },
 });
 
 const Reserva = mongoose.model("Reserva", ReservaSchema);
 
-// Rotas da API
-
-// Rota para criar uma nova reserva
 app.post("/reservas", async (req, res) => {
   try {
     const novaReserva = new Reserva(req.body);
@@ -44,7 +38,6 @@ app.post("/reservas", async (req, res) => {
   }
 });
 
-// Rota para listar todas as reservas
 app.get("/reservas", async (req, res) => {
   try {
     const reservas = await Reserva.find();
@@ -54,7 +47,6 @@ app.get("/reservas", async (req, res) => {
   }
 });
 
-// Rota para cancelar uma reserva
 app.delete("/reservas/:id", async (req, res) => {
   try {
     const reserva = await Reserva.findByIdAndDelete(req.params.id);
@@ -67,8 +59,7 @@ app.delete("/reservas/:id", async (req, res) => {
   }
 });
 
-// Iniciar o servidor na porta 5000
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor a correr na porta ${PORT}`);
 });
