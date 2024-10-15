@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #2d3748;
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input {
+  font-size: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  background-color: #edf2f7;
+}
+
+.reserva-form,
+.reserva-list {
+  margin-bottom: 40px;
+}
+
+p {
+  font-size: 1rem;
+}
+
+strong {
+  color: #4a5568;
+}
